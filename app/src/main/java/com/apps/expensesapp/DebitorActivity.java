@@ -9,6 +9,8 @@ import java.util.List;
 
 public class DebitorActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ID = "EXTRA_ID";
+
     private DebitorList mList;
 
     @Override
