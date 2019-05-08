@@ -8,11 +8,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/debitor_list"
+        android:id="@+id/debtor_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="onOpenDebitorList button"
-        tools:textSize="30dp"
+        android:text="onOpenDebtorList button"
+        android:textSize="30dp"
         android:padding="4dp"
         android:background="@color/cardview_dark_background"
         />

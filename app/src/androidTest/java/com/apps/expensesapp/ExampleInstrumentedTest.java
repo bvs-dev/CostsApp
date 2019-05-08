@@ -1,4 +1,4 @@
-package com.apps.costsapp;
+package com.apps.expensesapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.apps.costsapp", appContext.getPackageName());
+        assertEquals("com.apps.expensesapp", appContext.getPackageName());
     }
 }

@@ -2,6 +2,8 @@
   <dictionary name="User">
     <words>
       <w>debitor</w>
+      <w>debitors</w>
+      <w>expensesapp</w>
     </words>
   </dictionary>
 </component>

@@ -1,4 +1,4 @@
-package com.apps.costsapp;
+package com.apps.expensesapp;
 
 import org.junit.Test;
 
