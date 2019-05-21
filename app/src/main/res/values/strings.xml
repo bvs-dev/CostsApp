@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ExpensesApp</string>
+    <string name="enter_name">Enter name:</string>
+    <string name="name">Name</string>
+    <string name="enter_your_debt">Enter your debt:</string>
+    <string name="enter_person_s_debt">Enter person\'s debt:</string>
+    <string name="debt">Debt</string>
+    <string name="create_entry">Create entry</string>
+    <string name="create">Create</string>
 </resources>

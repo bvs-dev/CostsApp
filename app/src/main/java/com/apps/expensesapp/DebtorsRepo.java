@@ -93,6 +93,19 @@ public class DebtorsRepo extends SQLiteOpenHelper {
         return debtor;
     }
 
+    private void addDebtorInner(SQLiteDatabase db, String name, double userDebt, double debt) {
+        ContentValues cv = new ContentValues();
+        cv.put(NAME, name);
+        cv.put(USER_DEBT_VAL, userDebt);
+        cv.put(DEBT_VAL, debt);
+        db.insert(TABLE_NAME, null, cv);
+    }
+
+    public void addDebtor(String name, double userDebt, double debt) {
+        addDebtorInner(getWritableDatabase(), name, userDebt, debt);
+        notifyChanged();
+    }
+
     private void notifyChanged() {
         for (Listener listener : mListeners) listener.onDataChanged();
     }

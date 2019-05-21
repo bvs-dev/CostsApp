@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Расходы</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="enter_person_s_debt">Введите имя человека</string>
+    <string name="enter_your_debt">Введите ваш долг</string>
+    <string name="name">Имя</string>
+    <string name="debt">Задолженность</string>
+    <string name="create">Создать</string>
+    <string name="create_entry">Создание записи</string>
+</resources>

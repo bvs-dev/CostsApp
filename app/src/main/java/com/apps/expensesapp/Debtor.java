@@ -13,6 +13,6 @@ public class Debtor {
         this.name = name;
         this.userDebt = userDebt;
         this.debt = debt;
-        this.gap = userDebt - debt;
+        this.gap = debt - userDebt;
     }
 }
