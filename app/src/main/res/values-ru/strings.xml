@@ -2,10 +2,13 @@
 <resources>
     <string name="app_name">Расходы</string>
     <string name="enter_name">Введите имя</string>
-    <string name="enter_person_s_debt">Введите имя человека</string>
+    <string name="enter_person_s_debt">Введите долг человека</string>
     <string name="enter_your_debt">Введите ваш долг</string>
     <string name="name">Имя</string>
     <string name="debt">Задолженность</string>
     <string name="create">Создать</string>
     <string name="create_entry">Создание записи</string>
+    <string name="amount_valid">Сумма должна быть неотрицательной</string>
+    <string name="name_valid">Имя должно быть введено</string>
+    <string name="debts">Долги</string>
 </resources>

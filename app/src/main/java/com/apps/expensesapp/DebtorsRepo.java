@@ -61,11 +61,7 @@ public class DebtorsRepo extends SQLiteOpenHelper {
 
     public void createTestData(SQLiteDatabase db) {
         for (int i = 0; i < 10; i++) {
-            ContentValues cv = new ContentValues();
-            cv.put(NAME, "debtor " + i);
-            cv.put(USER_DEBT_VAL, 10*i);
-            cv.put(DEBT_VAL, (10 - i) * 10);
-            db.insert(TABLE_NAME, null, cv);
+            addDebtorInner(db,"debtor " + i, 10* i, (10 - i) * 10);
         }
     }
 

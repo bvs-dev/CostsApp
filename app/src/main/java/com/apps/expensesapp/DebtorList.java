@@ -1,6 +1,11 @@
 package com.apps.expensesapp;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +30,7 @@ public class DebtorList {
 
     class DebtorAdapter extends RecyclerView.Adapter<DebtorAdapter.Vh> {
 
+        private Context context;
         private List<Debtor> mData;
 
         DebtorAdapter() {
@@ -34,6 +40,12 @@ public class DebtorList {
         void setData(List<Debtor> data) {
             mData = data;
             notifyDataSetChanged();
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            context = recyclerView.getContext();
         }
 
         @NonNull
@@ -73,10 +85,39 @@ public class DebtorList {
             }
 
             void bind(Debtor debtor) {
+
+                double dGap = debtor.gap;
+                double dGapNegative = dGap * (-1);
+                String gapValuePositive = "+" + dGap;
+                String gapValueNegative = "−" + dGapNegative;
+                int red = ContextCompat.getColor(context , R.color.colorRed);
+                int green = ContextCompat.getColor(context, R.color.colorGreen);
+                int defaultTextColor = ContextCompat.getColor(context, R.color.colorPrimaryText);
+
+
                 mName.setText(debtor.name);
                 mUserDebt.setText(String.valueOf(debtor.userDebt));
                 mDebt.setText(String.valueOf(debtor.debt));
-                mGap.setText(String.valueOf(debtor.gap));
+
+
+                if (debtor.userDebt > 0) {
+                    mUserDebt.setTextColor(red);
+                } else mUserDebt.setTextColor(defaultTextColor);
+
+                if (debtor.debt > 0) {
+                    mDebt.setTextColor(green);
+                } else mDebt.setTextColor(defaultTextColor);
+
+                if (debtor.gap> 0) {
+                    mGap.setText(gapValuePositive);
+                    mGap.setBackgroundResource(R.drawable.gap_background_positive);
+                } else if (debtor.gap == 0) {
+                    mGap.setText(String.valueOf(dGap));
+                    mGap.setBackgroundResource(R.drawable.gap_background_default);
+                } else {
+                    mGap.setText(gapValueNegative);
+                    mGap.setBackgroundResource(R.drawable.gap_background_negative);
+                }
 
             }
         }

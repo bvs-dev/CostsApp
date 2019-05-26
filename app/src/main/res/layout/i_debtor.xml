@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:background="@color/colorPrimaryBackground"
+    >
 
     <TextView
         android:id="@+id/i_debtor_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Name SecondName"
-        android:gravity="start"
+        android:gravity="center"
         android:padding="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         />
@@ -39,8 +42,12 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:padding="4dp"
+            android:layout_margin="4dp"
             tools:text="+500"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/gap_background_default"/>
+
 
         <TextView
             android:id="@+id/i_debtor_debt"

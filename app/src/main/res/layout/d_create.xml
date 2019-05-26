@@ -38,6 +38,8 @@
         android:layout_height="wrap_content"
         android:lines="1"
         android:hint="@string/debt"
+        android:inputType="numberDecimal"
+        android:digits="0123456789."
         />
 
     <TextView
@@ -55,6 +57,8 @@
         android:layout_height="wrap_content"
         android:lines="1"
         android:hint="@string/debt"
+        android:inputType="numberDecimal"
+        android:digits="0123456789."
         />
 
 

@@ -7,4 +7,7 @@
     <string name="debt">Debt</string>
     <string name="create_entry">Create entry</string>
     <string name="create">Create</string>
+    <string name="name_valid">Name must be defined</string>
+    <string name="amount_valid">Amount must be non-negative</string>
+    <string name="debts">Debts</string>
 </resources>
