@@ -34,11 +34,12 @@ public class CreateDialog extends DialogFragment {
                     userDebtET = mView.findViewById(R.id.d_create_userdebt);
                     CharSequence uDText = userDebtET.getText();
                     double userDebt = uDText.length() != 0 ? Double.parseDouble(uDText.toString()) : 0;
+                    userDebt = Math.round(userDebt*100)/100D;
 
                     debtET = mView.findViewById(R.id.d_create_debt);
                     CharSequence dText = debtET.getText();
                     double debt = dText.length() != 0 ? Double.parseDouble(dText.toString()) : 0;
-
+                    debt = Math.round(debt*100)/100D;
 
                     if (isValid(name, dialog)) {
                         DebtorsRepo.getInstance(CreateDialog.this.getContext())

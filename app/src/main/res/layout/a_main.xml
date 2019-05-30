@@ -8,13 +8,42 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/debtor_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="onOpenDebtorList button"
-        android:textSize="30dp"
-        android:padding="4dp"
-        android:background="@color/cardview_dark_background"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="@string/balance"
+        android:textSize="40sp"
+        android:padding="6dp"
+        />
+
+    <TextView
+        android:id="@+id/a_main_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="6dp"
+        android:textSize="50sp"
+        tools:text="-9999"
+        tools:textSize="50sp"
+        />
+
+    <TextView
+        android:id="@+id/a_main_openlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_gravity="center"
+        android:text="@string/open_debtors_list"
+        android:textSize="30sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/main_button_bg"
         />
 
 </LinearLayout>

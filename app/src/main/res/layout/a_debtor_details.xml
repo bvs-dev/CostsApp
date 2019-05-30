@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryBackground">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimaryDark"
+            app:title="@string/details"
+            app:titleTextColor="#FFF"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/a_details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        tools:text="Name last name"
+        tools:textSize="25sp"
+        android:gravity="center"
+        android:padding="16dp"
+        />
+
+    <TextView
+        android:id="@+id/a_details_user_debt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="20sp"
+        tools:text="Your debt: 15000"
+        tools:textSize="20sp"
+        />
+
+
+    <TextView
+        android:id="@+id/a_details_debt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="20sp"
+        tools:text="Person's debt: 2000"
+        tools:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/a_details_gap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="20sp"
+        tools:text="Gap: -13000"
+        tools:textSize="20sp"
+        />
+
+
 
 </LinearLayout>

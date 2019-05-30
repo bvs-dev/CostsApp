@@ -1,6 +1,7 @@
 package com.apps.expensesapp;
 
 import android.arch.lifecycle.ReportFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,7 +30,13 @@ public class DebtorsActivity extends AppCompatActivity implements DebtorsRepo.Li
             return true;
         });
 
-        mList = new DebtorList(findViewById(R.id.list));
+        mList = new DebtorList(findViewById(R.id.list), new DebtorList.Listener() {
+            @Override
+            public void onOpen(Debtor debtor) {
+                startActivity(new Intent(DebtorsActivity.this, DebtorDetailsActivity.class)
+                        .putExtra(DebtorDetailsActivity.EXTRA_ID, debtor.id));
+            }
+        });
         onDataChanged();
         DebtorsRepo.getInstance(this).setListener(this);
     }

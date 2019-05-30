@@ -10,4 +10,10 @@
     <string name="name_valid">Name must be defined</string>
     <string name="amount_valid">Amount must be non-negative</string>
     <string name="debts">Debts</string>
+    <string name="details">Details</string>
+    <string name="user_debt" formatted="true">Your debt: %1$s</string>
+    <string name="person_debt">Person\'s debt: %1$s</string>
+    <string name="gap">Gap: %1$s</string>
+    <string name="open_debtors_list">open persons list</string>
+    <string name="balance">Balance:</string>
 </resources>

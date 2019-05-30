@@ -16,9 +16,17 @@ import java.util.List;
 
 public class DebtorList {
 
-    private final DebtorAdapter mAdapter;
+    public interface Listener {
 
-    public DebtorList(RecyclerView rv) {
+        void onOpen(Debtor debtor);
+
+    }
+
+    private final DebtorAdapter mAdapter;
+    private final Listener mListener;
+
+    public DebtorList(RecyclerView rv, Listener listener) {
+        mListener = listener;
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         mAdapter = new DebtorAdapter();
         rv.setAdapter(mAdapter);
@@ -82,24 +90,25 @@ public class DebtorList {
                 mUserDebt = itemView.findViewById(R.id.i_debtor_userDebt);
                 mDebt = itemView.findViewById(R.id.i_debtor_debt);
                 mGap = itemView.findViewById(R.id.i_debtor_gap);
+                mName.setOnClickListener(v -> mListener.onOpen(mData.get(getAdapterPosition())));
             }
 
             void bind(Debtor debtor) {
 
                 double dGap = debtor.gap;
                 double dGapNegative = dGap * (-1);
-                String gapValuePositive = "+" + dGap;
-                String gapValueNegative = "−" + dGapNegative;
+                String gapValuePositive = "+" + numberReduction(dGap);
+                String gapValueNegative = "−" + numberReduction(dGapNegative);
                 int red = ContextCompat.getColor(context , R.color.colorRed);
                 int green = ContextCompat.getColor(context, R.color.colorGreen);
                 int defaultTextColor = ContextCompat.getColor(context, R.color.colorPrimaryText);
 
 
                 mName.setText(debtor.name);
-                mUserDebt.setText(String.valueOf(debtor.userDebt));
-                mDebt.setText(String.valueOf(debtor.debt));
+                mUserDebt.setText(numberReduction(debtor.userDebt));
+                mDebt.setText(numberReduction(debtor.debt));
 
-
+                // choosing text color depending on number
                 if (debtor.userDebt > 0) {
                     mUserDebt.setTextColor(red);
                 } else mUserDebt.setTextColor(defaultTextColor);
@@ -108,17 +117,43 @@ public class DebtorList {
                     mDebt.setTextColor(green);
                 } else mDebt.setTextColor(defaultTextColor);
 
+                // choosing background depending on number
                 if (debtor.gap> 0) {
                     mGap.setText(gapValuePositive);
                     mGap.setBackgroundResource(R.drawable.gap_background_positive);
                 } else if (debtor.gap == 0) {
-                    mGap.setText(String.valueOf(dGap));
+                    mGap.setText(numberReduction(dGap));
                     mGap.setBackgroundResource(R.drawable.gap_background_default);
                 } else {
                     mGap.setText(gapValueNegative);
                     mGap.setBackgroundResource(R.drawable.gap_background_negative);
                 }
 
+            }
+
+            public String numberReduction(double number) {
+
+                if (number < 0) number = number * (-1);
+
+                String result = String.valueOf((int)number);
+
+                int numberLength = String.valueOf((int)number).length();
+                double cuted = Math.round((number/10 * (numberLength - 1))*100)/100d;
+
+                String str = String.valueOf(cuted);
+               /* str = str.substring(0, str.length() - 1);*/
+
+               /* int firstDigit = (int) number/(10*(numberLength - 1));
+                int secondDigit = (int) (number - firstDigit *  10 * (numberLength - 1)) / 10*(numberLength - 2);*/
+
+                if (numberLength > 9) {
+                    result = str + "kkk";
+                } else if (numberLength <= 9 && numberLength > 6) {
+                    result = str + "kk";
+                } else if (numberLength == 6) result = ((int)Math.round(number/1000)) + "k";
+
+
+                return result;
             }
         }
 

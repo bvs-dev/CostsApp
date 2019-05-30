@@ -20,6 +20,7 @@
         </activity>
         <activity android:name="com.apps.expensesapp.DebtorsActivity">
         </activity>
+        <activity android:name=".DebtorDetailsActivity"/>
     </application>
 
 </manifest>

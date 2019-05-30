@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
+    android:layout_marginBottom="1dp"
+    android:paddingBottom="10dp"
     android:background="@color/colorPrimaryBackground"
     >
 

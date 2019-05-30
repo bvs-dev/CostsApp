@@ -11,4 +11,10 @@
     <string name="amount_valid">Сумма должна быть неотрицательной</string>
     <string name="name_valid">Имя должно быть введено</string>
     <string name="debts">Долги</string>
+    <string name="details">Детали</string>
+    <string name="gap" formatted="true">Разница: %1$s</string>
+    <string name="user_debt" formatted="true">Ваш долг: %1$s</string>
+    <string name="person_debt" formatted="true">Долг человека: %1$s</string>
+    <string name="open_debtors_list">открыть список людей</string>
+    <string name="balance">Баланс:</string>
 </resources>
