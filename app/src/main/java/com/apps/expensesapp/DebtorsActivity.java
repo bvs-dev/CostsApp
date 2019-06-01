@@ -37,9 +37,28 @@ public class DebtorsActivity extends AppCompatActivity implements DebtorsRepo.Li
                 startActivity(new Intent(DebtorsActivity.this, DebtorDetailsActivity.class)
                         .putExtra(DebtorDetailsActivity.EXTRA_ID, debtor.id));
             }
+
+            @Override
+            public void onDebt(Debtor debtor) {
+                startEditActivity(debtor, "person");
+            }
+
+            @Override
+            public void onUserDebt(Debtor debtor) {
+                startEditActivity(debtor, "user");
+            }
         });
         onDataChanged();
         DebtorsRepo.getInstance(this).setListener(this);
+    }
+
+    private void startEditActivity(Debtor debtor ,String choice) {
+        Intent intent = new Intent(DebtorsActivity.this, EditDebtActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString(EditDebtActivity.EXTRA_CHOICE, choice);
+        extras.putInt(EditDebtActivity.EXTRA_ID, debtor.id);
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 
     @Override

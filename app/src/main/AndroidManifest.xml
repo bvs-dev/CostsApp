@@ -21,6 +21,7 @@
         <activity android:name="com.apps.expensesapp.DebtorsActivity">
         </activity>
         <activity android:name=".DebtorDetailsActivity"/>
+        <activity android:name=".EditDebtActivity" />
     </application>
 
 </manifest>

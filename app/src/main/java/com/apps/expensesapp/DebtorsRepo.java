@@ -51,7 +51,6 @@ public class DebtorsRepo extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_SQL);
-        createTestData(db);
     }
 
     @Override
@@ -91,6 +90,20 @@ public class DebtorsRepo extends SQLiteOpenHelper {
             return null;
         }
 
+    }
+
+    public void setUserDebtVal(Debtor debtor, int value) {
+        ContentValues cv = new ContentValues();
+        cv.put(USER_DEBT_VAL, value);
+        getWritableDatabase().update(TABLE_NAME, cv, ID + " = " + debtor.id, null);
+        notifyChanged();
+    }
+
+    public void setDebtVal(Debtor debtor, int value) {
+        ContentValues cv = new ContentValues();
+        cv.put(DEBT_VAL, value);
+        getWritableDatabase().update(TABLE_NAME, cv, ID + " = " + debtor.id, null);
+        notifyChanged();
     }
 
     private void addDebtorInner(SQLiteDatabase db, String name, int userDebt, int debt) {

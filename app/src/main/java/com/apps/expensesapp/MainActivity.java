@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements DebtorsRepo.Listener{
     TextView mListButtonTv;
     TextView mBalance;
     List<Debtor> mData;
@@ -18,13 +18,12 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_main);
-        mBalance = findViewById(R.id.a_main_balance);
-        mData = DebtorsRepo.getInstance(this).getDebtors();
-        mBalance.setText(setBalance());
 
         mListButtonTv = findViewById(R.id.a_main_openlist);
         mListButtonTv.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, DebtorsActivity.class)));
+        onDataChanged();
+        DebtorsRepo.getInstance(MainActivity.this).setListener(this);
     }
 
     public double getBalance(List<Debtor> data) {
@@ -50,6 +49,13 @@ public class MainActivity extends AppCompatActivity{
         else if (balance < 0) return negative;
         else return formatter.format(balance);
 
+    }
+
+    @Override
+    public void onDataChanged() {
+        mBalance = findViewById(R.id.a_main_balance);
+        mData = DebtorsRepo.getInstance(this).getDebtors();
+        mBalance.setText(setBalance());
     }
 
     // TODO: 5/31/2019 add listener

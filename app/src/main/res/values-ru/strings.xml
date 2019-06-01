@@ -21,4 +21,8 @@
     <string name="delete_entry">Удалить Запись?</string>
     <string name="yes">Да</string>
     <string name="delete">Удалить</string>
+    <string name="enter_changing">Введите изменение:</string>
+    <string name="amount">Сумма</string>
+    <string name="minus">−</string>
+    <string name="plus">+</string>
 </resources>

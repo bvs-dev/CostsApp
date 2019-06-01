@@ -22,6 +22,10 @@ public class DebtorList {
 
         void onOpen(Debtor debtor);
 
+        void onDebt(Debtor debtor);
+
+        void onUserDebt(Debtor debtor);
+
     }
 
     private final DebtorAdapter mAdapter;
@@ -92,6 +96,8 @@ public class DebtorList {
                 mUserDebt = itemView.findViewById(R.id.i_debtor_userDebt);
                 mDebt = itemView.findViewById(R.id.i_debtor_debt);
                 mGap = itemView.findViewById(R.id.i_debtor_gap);
+                mUserDebt.setOnClickListener(v -> mListener.onUserDebt(mData.get(getAdapterPosition())));
+                mDebt.setOnClickListener(v -> mListener.onDebt(mData.get(getAdapterPosition())));
                 mName.setOnClickListener(v -> mListener.onOpen(mData.get(getAdapterPosition())));
                 mGap.setOnClickListener(v -> mListener.onOpen(mData.get(getAdapterPosition())));
             }
