@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class DebtorList {
@@ -91,12 +93,13 @@ public class DebtorList {
                 mDebt = itemView.findViewById(R.id.i_debtor_debt);
                 mGap = itemView.findViewById(R.id.i_debtor_gap);
                 mName.setOnClickListener(v -> mListener.onOpen(mData.get(getAdapterPosition())));
+                mGap.setOnClickListener(v -> mListener.onOpen(mData.get(getAdapterPosition())));
             }
 
             void bind(Debtor debtor) {
 
-                double dGap = debtor.gap;
-                double dGapNegative = dGap * (-1);
+                int dGap = debtor.gap;
+                int dGapNegative = dGap * (-1);
                 String gapValuePositive = "+" + numberReduction(dGap);
                 String gapValueNegative = "−" + numberReduction(dGapNegative);
                 int red = ContextCompat.getColor(context , R.color.colorRed);
@@ -131,29 +134,42 @@ public class DebtorList {
 
             }
 
-            public String numberReduction(double number) {
+            public String numberReduction(int number) {
 
                 if (number < 0) number = number * (-1);
 
-                String result = String.valueOf((int)number);
+                double value = number/100d;
+                String result = String.valueOf((int)value);
+                int numberLength = integerLength(value);
 
-                int numberLength = String.valueOf((int)number).length();
-                double cuted = Math.round((number/10 * (numberLength - 1))*100)/100d;
-
-                String str = String.valueOf(cuted);
-               /* str = str.substring(0, str.length() - 1);*/
-
-               /* int firstDigit = (int) number/(10*(numberLength - 1));
-                int secondDigit = (int) (number - firstDigit *  10 * (numberLength - 1)) / 10*(numberLength - 2);*/
-
-                if (numberLength > 9) {
-                    result = str + "kkk";
-                } else if (numberLength <= 9 && numberLength > 6) {
-                    result = str + "kk";
-                } else if (numberLength == 6) result = ((int)Math.round(number/1000)) + "k";
+                if (numberLength >= 10) {
+                    result = round(value/1000000000d) + "kkk";
+                } else if (numberLength >= 7) {
+                    result = round(value/1000000d) + "kk";
+                } else if (numberLength == 6) result = ((int)Math.round(value/1000)) + "k";
 
 
                 return result;
+            }
+
+            public int integerLength(double decimal) {
+
+                double number = (double) (int) decimal;
+                int length = 1;
+
+                while ((int) number > 9) {
+
+                    number = number / 10;
+                    length++;
+
+                }
+                return length;
+            }
+
+            public double round(double decimal) {
+
+                return Math.round(decimal*100)/100d;
+
             }
         }
 

@@ -32,14 +32,10 @@ public class CreateDialog extends DialogFragment {
                     String name = nameET.getText().toString();
 
                     userDebtET = mView.findViewById(R.id.d_create_userdebt);
-                    CharSequence uDText = userDebtET.getText();
-                    double userDebt = uDText.length() != 0 ? Double.parseDouble(uDText.toString()) : 0;
-                    userDebt = Math.round(userDebt*100)/100D;
+                    int userDebt = inputToInt(userDebtET);
 
                     debtET = mView.findViewById(R.id.d_create_debt);
-                    CharSequence dText = debtET.getText();
-                    double debt = dText.length() != 0 ? Double.parseDouble(dText.toString()) : 0;
-                    debt = Math.round(debt*100)/100D;
+                    int debt = inputToInt(debtET);
 
                     if (isValid(name, dialog)) {
                         DebtorsRepo.getInstance(CreateDialog.this.getContext())
@@ -69,9 +65,16 @@ public class CreateDialog extends DialogFragment {
         }
 
         return isValid;
+    }
 
 
+    private int inputToInt(EditText editText) {
 
+        CharSequence inputText = editText.getText();
+        double doubleVal = inputText.length() != 0 ? Double.parseDouble(inputText.toString()) : 0;
+        doubleVal = Math.round(doubleVal*100)/100d;
+
+        return  (int) (doubleVal * 100);
     }
 
 

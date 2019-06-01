@@ -6,7 +6,6 @@
     <string name="enter_person_s_debt">Enter person\'s debt:</string>
     <string name="debt">Debt</string>
     <string name="create_entry">Create entry</string>
-    <string name="create">Create</string>
     <string name="name_valid">Name must be defined</string>
     <string name="amount_valid">Amount must be non-negative</string>
     <string name="debts">Debts</string>
@@ -16,4 +15,9 @@
     <string name="gap">Gap: %1$s</string>
     <string name="open_debtors_list">open persons list</string>
     <string name="balance">Balance:</string>
+    <string name="delete_entry">Delete entry?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="create">Create</string>
 </resources>

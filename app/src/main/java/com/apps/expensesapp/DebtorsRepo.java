@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -72,24 +73,27 @@ public class DebtorsRepo extends SQLiteOpenHelper {
         List<Debtor> list = new ArrayList<>(c.getColumnCount());
         while (c.moveToNext()) {
             list.add(new Debtor(c.getInt(0),
-                    c.getString(1), c.getDouble(2), c.getDouble(3)));
+                    c.getString(1), c.getInt(2), c.getInt(3)));
         }
         c.close();
         return  list;
     }
 
+    @Nullable
     public Debtor getDebtor(int id) {
         String[] cols = {ID, NAME, USER_DEBT_VAL, DEBT_VAL};
-        Cursor c = getReadableDatabase().query(TABLE_NAME, cols, ID + " = " + id,
-                null, null, null, null);
-        c.moveToFirst();
-        Debtor debtor = new Debtor(c.getInt(0),
-                c.getString(1), c.getDouble(2), c.getDouble(3));
-        c.close();
-        return debtor;
+        try (Cursor c = getReadableDatabase().query(TABLE_NAME, cols, ID + " = " + id,
+                null, null, null, null)) {
+            if (c.moveToFirst()) {
+                return new Debtor(c.getInt(0),
+                        c.getString(1), c.getInt(2), c.getInt(3));
+            }
+            return null;
+        }
+
     }
 
-    private void addDebtorInner(SQLiteDatabase db, String name, double userDebt, double debt) {
+    private void addDebtorInner(SQLiteDatabase db, String name, int userDebt, int debt) {
         ContentValues cv = new ContentValues();
         cv.put(NAME, name);
         cv.put(USER_DEBT_VAL, userDebt);
@@ -97,8 +101,13 @@ public class DebtorsRepo extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, cv);
     }
 
-    public void addDebtor(String name, double userDebt, double debt) {
+    public void addDebtor(String name, int userDebt, int debt) {
         addDebtorInner(getWritableDatabase(), name, userDebt, debt);
+        notifyChanged();
+    }
+
+    public void deleteDebtor(int id) {
+        getWritableDatabase().delete(TABLE_NAME, ID + " = " + id, null);
         notifyChanged();
     }
 

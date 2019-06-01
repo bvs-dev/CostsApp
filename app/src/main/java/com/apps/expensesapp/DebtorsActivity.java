@@ -27,6 +27,7 @@ public class DebtorsActivity extends AppCompatActivity implements DebtorsRepo.Li
             if (menuItem.getItemId() == R.id.m_debtors_create) {
                 new CreateDialog().show(getSupportFragmentManager(), null);
             }
+
             return true;
         });
 

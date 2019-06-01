@@ -3,9 +3,13 @@ package com.apps.expensesapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-public class DebtorDetailsActivity extends AppCompatActivity implements DebtorsRepo.Listener{
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+public class DebtorDetailsActivity extends AppCompatActivity implements DebtorsRepo.Listener, ConfirmDeleteDialog.Host{
 
     private TextView mNameTv;
     private TextView mUserDebt;
@@ -18,8 +22,19 @@ public class DebtorDetailsActivity extends AppCompatActivity implements DebtorsR
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDebtorId = getIntent().getIntExtra(EXTRA_ID, -1);
         setContentView(R.layout.a_debtor_details);
+        mDebtorId = getIntent().getIntExtra(EXTRA_ID, -1);
+
+        Toolbar toolbar = findViewById(R.id.details_toolbar);
+        toolbar.inflateMenu(R.menu.details);
+        toolbar.setOnMenuItemClickListener(menuItem -> {
+
+            if (menuItem.getItemId() == R.id.m_details_delete) {
+                new ConfirmDeleteDialog().show(getSupportFragmentManager(), null);
+            }
+            return true;
+        });
+
         mUserDebt = findViewById(R.id.a_details_user_debt);
         mDebt = findViewById(R.id.a_details_debt);
         mGap = findViewById(R.id.a_details_gap);
@@ -37,14 +52,25 @@ public class DebtorDetailsActivity extends AppCompatActivity implements DebtorsR
 
     @Override
     public void onDataChanged() {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
         Debtor debtor = getDebtor();
-        String uDText = String.format(getString(R.string.user_debt), String.valueOf(debtor.userDebt));
-        String dText = String.format(getString(R.string.person_debt), String.valueOf(debtor.debt));
-        String gapText = String.format(getString(R.string.gap), String.valueOf(debtor.gap));
-        mNameTv.setText(String.valueOf(debtor.name));
-        mUserDebt.setText(uDText);
-        mDebt.setText(dText);
-        mGap.setText(gapText);
-        mNameTv.setText(String.valueOf(debtor.name));
+        if (debtor != null) {
+            String uDText = String.format(getString(R.string.user_debt), formatter.format(debtor.userDebt/100d));
+            String dText = String.format(getString(R.string.person_debt), formatter.format(debtor.debt/100d));
+            String gapText = String.format(getString(R.string.gap), formatter.format(debtor.gap/100d));
+            mNameTv.setText(String.valueOf(debtor.name));
+            mUserDebt.setText(uDText);
+            mDebt.setText(dText);
+            mGap.setText(gapText);
+            mNameTv.setText(String.valueOf(debtor.name));
+        } else  {
+            finish();
+        }
+    }
+
+    @Override
+    public void onConfirm() {
+        DebtorsRepo.getInstance(this).deleteDebtor(mDebtorId);
     }
 }

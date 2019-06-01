@@ -17,4 +17,8 @@
     <string name="person_debt" formatted="true">Долг человека: %1$s</string>
     <string name="open_debtors_list">открыть список людей</string>
     <string name="balance">Баланс:</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete_entry">Удалить Запись?</string>
+    <string name="yes">Да</string>
+    <string name="delete">Удалить</string>
 </resources>
