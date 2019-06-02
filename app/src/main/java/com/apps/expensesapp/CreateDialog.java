@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,7 @@ public class CreateDialog extends DialogFragment {
                     debtET = mView.findViewById(R.id.d_create_debt);
                     int debt = inputToInt(debtET);
 
-                    if (isValid(name, dialog)) {
+                    if (isValid(name, dialog, userDebt, debt)) {
                         DebtorsRepo.getInstance(CreateDialog.this.getContext())
                                 .addDebtor(name, userDebt, debt);
                     }
@@ -48,7 +47,7 @@ public class CreateDialog extends DialogFragment {
     }
 
 
-    private boolean isValid(String name, DialogInterface dialog) {
+    private boolean isValid(String name, DialogInterface dialog, int userDebt, int debt) {
         boolean isValid = true;
 
         View view = LayoutInflater.from(getContext())
@@ -60,6 +59,11 @@ public class CreateDialog extends DialogFragment {
 
         if (name.trim().equals("")) {
             text.setText(getString(R.string.name_valid));
+            isValid = false;
+            toast.show();
+            dialog.cancel();
+        } else if (userDebt > 21474836 || debt > 21474836) {
+            text.setText(getString(R.string.out_range));
             isValid = false;
             toast.show();
             dialog.cancel();

@@ -24,4 +24,5 @@
     <string name="amount">Amount</string>
     <string name="minus">−</string>
     <string name="plus">+</string>
+    <string name="out_range">Number is out of range</string>
 </resources>

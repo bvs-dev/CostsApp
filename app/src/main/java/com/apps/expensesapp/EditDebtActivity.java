@@ -3,8 +3,12 @@ package com.apps.expensesapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditDebtActivity extends AppCompatActivity {
 
@@ -41,26 +45,26 @@ public class EditDebtActivity extends AppCompatActivity {
         Debtor debtor = DebtorsRepo.getInstance(this).getDebtor(mDebtorId);
         int result;
 
-        if (operation.equals("minus")) {
-            if (mChoice.equals("person")) {
-                result = debtor.debt - amount;
-                DebtorsRepo.getInstance(this).setDebtVal(debtor, result);
-            } else if (mChoice.equals("user")) {
-                result = debtor.userDebt - amount;
-                DebtorsRepo.getInstance(this).setUserDebtVal(debtor, result);
+        if (isValid(amount)) {
+            if (operation.equals("minus")) {
+                if (mChoice.equals("person")) {
+                    result = debtor.debt - amount;
+                    DebtorsRepo.getInstance(this).setDebtVal(debtor, result);
+                } else if (mChoice.equals("user")) {
+                    result = debtor.userDebt - amount;
+                    DebtorsRepo.getInstance(this).setUserDebtVal(debtor, result);
+                }
+            } else  if (operation.equals("plus")) {
+                if (mChoice.equals("person")) {
+                    result = debtor.debt + amount;
+                    DebtorsRepo.getInstance(this).setDebtVal(debtor, result);
+                } else if (mChoice.equals("user")) {
+                    result = debtor.userDebt + amount;
+                    DebtorsRepo.getInstance(this).setUserDebtVal(debtor, result);
+                }
             }
-        } else { if (operation.equals("plus")) {
-            if (mChoice.equals("person")) {
-                result = debtor.debt + amount;
-                DebtorsRepo.getInstance(this).setDebtVal(debtor, result);
-            } else if (mChoice.equals("user")) {
-                result = debtor.userDebt + amount;
-                DebtorsRepo.getInstance(this).setUserDebtVal(debtor, result);
-            }
+            finish();
         }
-        }
-        finish();
-
     }
 
     private int inputToInt(EditText editText) {
@@ -70,5 +74,24 @@ public class EditDebtActivity extends AppCompatActivity {
         doubleVal = Math.round(doubleVal*100)/100d;
 
         return  (int) (doubleVal * 100);
+    }
+
+    private boolean isValid(int amount) {
+
+        boolean isValid = true;
+
+        View view = LayoutInflater.from(getApplicationContext())
+                .inflate(R.layout.l_toast, null, false);
+        TextView text = view.findViewById(R.id.i_toast_message);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setView(view);
+
+        if (amount > 21474836) {
+            text.setText(getString(R.string.out_range));
+            isValid = false;
+            toast.show();
+        }
+        return isValid;
     }
 }
